@@ -1,0 +1,33 @@
+{
+  "name": "my-first-pwapp",
+  "version": "1.0.0",
+  "description": "pwa-app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/.bin/tsc && node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/berlinen/first-pwapp.git"
+  },
+  "keywords": [
+    "pwa"
+  ],
+  "engines": {
+    "node": "10.15.0"
+  },
+  "author": "berlin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/berlinen/first-pwapp/issues"
+  },
+  "homepage": "https://github.com/berlinen/first-pwapp#readme",
+  "dependencies": {
+    "@types/express": "^4.17.2",
+    "@types/node": "^12.12.7",
+    "express-http-to-https": "^1.1.4",
+    "node-fetch": "^2.6.0",
+    "typescript": "^3.7.2"
+  }
+}
