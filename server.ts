@@ -6,11 +6,15 @@
 const express = require('express');
 const fetch = require('node-fetch');
 const redirectToHTTPS = require('express-http-to-https').redirectToHTTPS;
+const dotenv = require('dotenv');
+
+dotenv.config('./env');
+// 本地初始化数据 设置 DARKSKY_API_KEY
+const API_KEY = process.env.DARKSKY_API_KEY;
+console.log(API_KEY)
 
 const FORECAST_DELAY = 0;
 
-// 本地初始化数据 设置 DARKSKY_API_KEY
-const API_KEY = process.env.DARKSKY_API_KEY;
 const BASE_URL = `https://api.darksky.net/forecast`;
 
 // 如果拿不到 Dark Sky API 用以下数据
@@ -131,7 +135,7 @@ function generateFakeForecast(location: string) {
     }
     return resp.json();
   }).then((data) => {
-    console.log('on' + JSON.stringify(data))
+    // console.log('on' + JSON.stringify(data))
     setTimeout(() => {
       resp.json(data);
     }, FORECAST_DELAY);

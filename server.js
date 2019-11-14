@@ -6,9 +6,12 @@
 const express = require('express');
 const fetch = require('node-fetch');
 const redirectToHTTPS = require('express-http-to-https').redirectToHTTPS;
-const FORECAST_DELAY = 0;
+const dotenv = require('dotenv');
+dotenv.config('./env');
 // 本地初始化数据 设置 DARKSKY_API_KEY
 const API_KEY = process.env.DARKSKY_API_KEY;
+console.log(API_KEY);
+const FORECAST_DELAY = 0;
 const BASE_URL = `https://api.darksky.net/forecast`;
 // 如果拿不到 Dark Sky API 用以下数据
 const fakeForecast = {
@@ -124,7 +127,7 @@ const getForecast = (req, resp) => {
         }
         return resp.json();
     }).then((data) => {
-        console.log('on' + JSON.stringify(data));
+        // console.log('on' + JSON.stringify(data))
         setTimeout(() => {
             resp.json(data);
         }, FORECAST_DELAY);
@@ -161,7 +164,7 @@ function startServer() {
     // Start the server
     return app.listen('8001', () => {
         // eslint-disable-next-line no-console
-        console.log('Local DevServer Started on port 8000...');
+        console.log('Local DevServer Started on port 8001...');
     });
 }
 startServer();
