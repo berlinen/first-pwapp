@@ -24,8 +24,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Weather PWA</title>
   <meta name="codelab" content="your-first-pwa-v3">
+  <!-- 独特的描述可以使你的搜索结果与搜索用户更相关，并可以增加搜索流量  -->
+  <meta name="description" content="A sample weather app">
+  <!-- 将浏览器的地址栏设置为与你的品牌色相匹配，可以提供更加沉浸式的用户体验。 -->
+  <meta name="theme-color" content="#2F3BA2" />
   <link rel="stylesheet" type="text/css" href="/styles/inline.css">
   <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
+  <link rel="manifest" href="/manifest.json">
+  <!-- CODELAB: Add iOS meta tags and icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Weather PWA">
+  <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png">
 
   <!-- CODELAB: Add link rel manifest -->
   <!-- CODELAB: Add iOS meta tags and icons -->
@@ -204,6 +214,14 @@
   <!-- CODELAB: Add the install script here -->
   <script>
     // CODELAB: Register service worker.
+    if('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(reg => {
+              console.log('Service worker registered.', reg);
+          })
+      })
+    }
   </script>
 
 </body>
