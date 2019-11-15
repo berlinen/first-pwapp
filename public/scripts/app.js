@@ -82,6 +82,7 @@ function renderForecast(card, data) {
   const cardLastUpdated = cardLastUpdatedElem.textContent;
   const lastUpdated = parseInt(cardLastUpdated);
 
+  // 应用要如何知道它是否显示了最新的数据?
   // If the data on the element is newer, skip the update.
   if (lastUpdated >= data.currently.time) {
     return;
@@ -163,6 +164,20 @@ function getForecastFromNetwork(coords) {
  */
 function getForecastFromCache(coords) {
   // CODELAB: Add code to get weather forecast from the caches object.
+  if(!('caches' in window)) {
+    return null
+  }
+  const url = `${window.location.origin}/forecast/${coords}`;
+  return caches.match(url)
+            .then(res => {
+              if(res) {
+                return res.json()
+              }
+              return null
+            }).catch(err => {
+              console.error('Error getting data from cache', err);
+              return null;
+            })
 
 }
 
@@ -198,7 +213,10 @@ function updateData() {
     const location = weatherApp.selectedLocations[key];
     const card = getForecastCard(location);
     // CODELAB: Add code to call getForecastFromCache
-
+    getForecastFromCache(location.geo)
+        .then(forecast => {
+          renderForecast(card, forecast)
+        })
     // Get the forecast data from the network.
     getForecastFromNetwork(location.geo)
         .then((forecast) => {
