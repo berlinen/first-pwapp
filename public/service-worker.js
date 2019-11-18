@@ -106,3 +106,29 @@ self.addEventListener('fetch', (evt) => {
     })
   )
 });
+
+// 监听推送动作
+self.addEventListener('push', (event) => {
+  console.log('[Service Worker] Push Received.');
+  console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
+
+  const title = 'Push Codelab';
+  const options = {
+    body: 'Yay it works.',
+    icon: 'images/icon.png',
+    badge: 'images/badge.png'
+  };
+  // eslint-disable-next-line max-len
+  const notificationPromise = self.registration.showNotification(title, options);
+  event.waitUntil(notificationPromise);
+});
+
+// 监听提示动作
+self.addEventListener('notificationcclick', (event) => {
+  console.log('[Service Worker] Notification click Received.');
+
+  event.notification.close();
+  event.waitUntil(
+      clients.openWindow('https://developers.google.com/web/')
+  );
+});
