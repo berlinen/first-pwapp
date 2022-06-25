@@ -28,7 +28,7 @@
     "@types/node": "^12.12.7",
     "dotenv": "^8.2.0",
     "express-http-to-https": "^1.1.4",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.7",
     "typescript": "^3.7.2"
   }
 }
